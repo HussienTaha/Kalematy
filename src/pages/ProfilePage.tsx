@@ -13,7 +13,7 @@ function ProfilePage() {
     <section>
       <PageHeader title="الملف الشخصي" subtitle="نظرة عامة على الحساب وتقدم المفردات." />
       {!isHydrated ? (
-        <Card className="max-w-xl p-8 text-slate-500 dark:text-slate-400">
+        <Card className="max-w-xl p-8 text-slate-500 ">
           <LoadingSpinner label="جارٍ تحميل الملف الشخصي..." />
         </Card>
       ) : !user ? (
@@ -21,16 +21,16 @@ function ProfilePage() {
       ) : (
         <Card className="max-w-xl space-y-3 p-5 sm:p-6">
         <p>
-            <span className="font-semibold text-slate-800 dark:text-slate-100">الاسم: </span>
-            <span className="text-slate-700 dark:text-slate-300">{user.name}</span>
+            <span className="font-semibold text-slate-800 ">الاسم: </span>
+            <span className="text-slate-700 ">{user.name}</span>
         </p>
         <p>
-            <span className="font-semibold text-slate-800 dark:text-slate-100">البريد الإلكتروني: </span>
-            <span className="text-slate-700 dark:text-slate-300">{user.email}</span>
+            <span className="font-semibold text-slate-800 ">البريد الإلكتروني: </span>
+            <span className="text-slate-700 ">{user.email}</span>
         </p>
         <p>
-            <span className="font-semibold text-slate-800 dark:text-slate-100">إجمالي الكلمات: </span>
-            <span className="text-slate-700 dark:text-slate-300">{words.length}</span>
+            <span className="font-semibold text-slate-800 ">إجمالي الكلمات: </span>
+            <span className="text-slate-700 ">{words.length}</span>
         </p>
         </Card>
       )}

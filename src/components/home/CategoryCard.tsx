@@ -13,7 +13,7 @@ function CategoryCard({ category, onClick, clickCount, completionText }: Categor
     <button
       type="button"
       onClick={() => onClick(category)}
-      className="group rounded-3xl bg-white p-4 text-right shadow-lg transition duration-300 hover:-translate-y-1.5 hover:shadow-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-indigo-300 dark:bg-slate-900"
+      className="group rounded-3xl bg-white p-4 text-right shadow-lg transition duration-300 hover:-translate-y-1.5 hover:shadow-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-indigo-300 "
       aria-label={`فتح فئة ${category.name}`}
     >
       <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl">

@@ -8,16 +8,16 @@ function HomeContent() {
   const { openCategory, progressByCategory, soundEnabled, toggleSound } = useCategorySlider()
 
   return (
-    <section className="min-h-screen bg-gradient-to-b from-sky-100 to-indigo-100 px-4 py-10 sm:py-12 dark:from-slate-950 dark:to-slate-900">
+    <section className="min-h-screen bg-gradient-to-b from-sky-50 to-indigo-50 px-4 py-10 sm:py-12  ">
       <div className="mx-auto max-w-6xl">
         <header className="mb-10 text-center sm:mb-12">
-          <p className="text-sm font-bold uppercase tracking-[0.2em] text-indigo-600 dark:text-indigo-300">
+          <p className="text-sm font-bold uppercase tracking-[0.2em] text-indigo-600 ">
             تعلّم للأطفال
           </p>
-          <h1 className="mt-3 text-4xl font-black text-slate-900 sm:text-5xl lg:text-6xl dark:text-slate-100">
+          <h1 className="mt-3 text-4xl font-black text-orange-500 sm:text-5xl lg:text-6xl ">
             مرحباً بك في كلماتي
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-base text-slate-600 sm:text-lg dark:text-slate-300">
+          <p className="mx-auto mt-4 max-w-2xl text-base text-slate-600 sm:text-lg ">
             اضغط على فئة ملوّنة لبدء استكشاف الكلمات.
           </p>
           <button
@@ -31,7 +31,7 @@ function HomeContent() {
           <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
             <Link
               to="/game"
-              className="rounded-full bg-white/80 px-5 py-3 text-sm font-bold text-slate-800 shadow-lg transition hover:bg-white dark:bg-slate-900/70 dark:text-slate-100 dark:hover:bg-slate-900"
+              className="rounded-full bg-white/80 px-5 py-3 text-sm font-bold text-slate-800 shadow-lg transition hover:bg-white   "
               aria-label="الذهاب إلى صفحة اللعبة"
             >
               لعبة للأطفال
@@ -39,7 +39,7 @@ function HomeContent() {
 
             <Link
               to="/game/choose-word"
-              className="rounded-full bg-white/80 px-5 py-3 text-sm font-bold text-slate-800 shadow-lg transition hover:bg-white dark:bg-slate-900/70 dark:text-slate-100 dark:hover:bg-slate-900"
+              className="rounded-full bg-white/80 px-5 py-3 text-sm font-bold text-slate-800 shadow-lg transition hover:bg-white   "
               aria-label="الذهاب إلى لعبة انظر واختر"
             >
               لعبة: انظر واختر
@@ -47,7 +47,7 @@ function HomeContent() {
 
             <Link
               to="/game/memory"
-              className="rounded-full bg-white/80 px-5 py-3 text-sm font-bold text-slate-800 shadow-lg transition hover:bg-white dark:bg-slate-900/70 dark:text-slate-100 dark:hover:bg-slate-900"
+              className="rounded-full bg-white/80 px-5 py-3 text-sm font-bold text-slate-800 shadow-lg transition hover:bg-white   "
               aria-label="الذهاب إلى لعبة الذاكرة"
             >
               لعبة الذاكرة

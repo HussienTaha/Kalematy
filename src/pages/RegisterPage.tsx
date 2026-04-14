@@ -67,7 +67,7 @@ function RegisterPage() {
           </Button>
         </form>
       </Card>
-      <p className="mt-4 text-sm text-slate-600 dark:text-slate-400">
+      <p className="mt-4 text-sm text-slate-600 ">
         لديك حساب بالفعل؟{' '}
         <Link className="font-medium text-indigo-600 hover:text-indigo-700" to="/login">
           تسجيل الدخول

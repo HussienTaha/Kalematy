@@ -41,17 +41,17 @@ function ImageSlider({
 }: ImageSliderProps) {
   if (!items || items.length === 0) {
     return (
-      <div className="flex flex-1 items-center justify-center rounded-3xl bg-slate-900/90 p-8 text-white">
+      <div className="flex flex-1 items-center justify-center rounded-3xl bg-slate-100 p-8 text-slate-500">
         لا توجد صور متاحة.
       </div>
     )
   }
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col gap-5">
+    <div className="flex min-h-0 flex-1 flex-col gap-6">
       <div
-        className={`relative mx-auto flex w-full min-h-[320px] flex-[1.35] items-center justify-center overflow-hidden rounded-[28px] border border-white/10 bg-gradient-to-br from-slate-900 to-slate-950 shadow-[0_20px_50px_rgba(0,0,0,0.45)] transition-all duration-300 sm:min-h-[420px] md:min-h-[480px] ${
-          isSpeaking ? 'ring-4 ring-emerald-300 ring-offset-2 ring-offset-slate-900 shadow-emerald-300/20' : ''
+        className={`relative mx-auto flex w-full min-h-[320px] flex-[1.4] items-center justify-center overflow-hidden rounded-[32px] border border-slate-300/50 bg-gradient-to-br from-slate-100 to-slate-200/60 shadow-medium transition-all duration-500 sm:min-h-[420px] md:min-h-[500px] ${
+          isSpeaking ? 'ring-4 ring-indigo-500/30 ring-offset-4 ring-offset-slate-100 shadow-glow' : ''
         }`}
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
@@ -60,7 +60,7 @@ function ImageSlider({
         <button
           type="button"
           onClick={onToggleSound}
-          className="absolute left-3 top-3 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-black/35 text-lg text-white backdrop-blur-sm transition hover:scale-105 hover:bg-black/45"
+          className="absolute left-5 top-5 z-10 flex h-14 w-14 items-center justify-center rounded-2xl border border-slate-300/50 bg-white/80 text-2xl shadow-soft backdrop-blur-md transition-all hover:scale-110 hover:bg-white active:scale-95"
           aria-label={soundEnabled ? 'كتم الصوت' : 'تشغيل الصوت'}
           title={soundEnabled ? 'الصوت يعمل' : 'الصوت متوقف'}
         >
@@ -69,41 +69,45 @@ function ImageSlider({
         <button
           type="button"
           onClick={onSpeak}
-          className="flex h-full w-full items-center justify-center p-3 sm:p-5"
+          className="flex h-full w-full items-center justify-center p-4 sm:p-8"
           aria-label={`نطق ${nameAr || name}`}
         >
           <SafeImage
             src={image}
             alt={name}
-            className={`h-full w-full rounded-[24px] object-contain object-center shadow-[0_12px_35px_rgba(0,0,0,0.35)] transition duration-500 ${
-              isSpeaking ? 'scale-[1.02] brightness-110' : 'scale-100'
+            className={`h-full w-full rounded-[28px] object-contain object-center transition-all duration-700 ${
+              isSpeaking ? 'scale-[1.08] drop-shadow-[0_25px_35px_rgba(0,0,0,0.15)]' : 'scale-100 drop-shadow-[0_15px_25px_rgba(0,0,0,0.1)]'
             }`}
-            style={{ animation: 'slidePulseIn 280ms ease-out' }}
+            style={{ animation: 'slidePulseIn 400ms cubic-bezier(0.34, 1.56, 0.64, 1)' }}
           />
         </button>
-        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent px-3 pb-2 pt-6">
-          <p className="text-center text-[11px] font-bold tracking-wide text-slate-100">اضغط على الصورة لسماع النطق</p>
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-200/80 via-slate-200/20 to-transparent px-5 pb-5 pt-12">
+          <p className="text-center text-[10px] font-black tracking-widest text-slate-500 uppercase opacity-70">اضغط على الصورة لسماع النطق</p>
         </div>
-
       </div>
 
-      <div className="rounded-2xl border border-white/10 bg-white/[0.08] px-3 py-2 shadow-[0_8px_22px_rgba(0,0,0,0.25)]">
-        <div className="flex items-center justify-between gap-2">
+      <div className="rounded-[24px] border border-slate-300/50 bg-slate-100/80 p-5 shadow-soft backdrop-blur-sm">
+        <div className="flex items-center justify-between gap-5">
           <button
             type="button"
             onClick={onPrev}
-            className="min-h-11 min-w-11 rounded-full border border-white/20 bg-white/10 px-3 text-lg font-bold text-white transition hover:bg-white/20"
+            className="flex h-14 w-14 items-center justify-center rounded-2xl border border-slate-300/50 bg-white text-2xl font-bold text-slate-700 shadow-soft transition-all hover:bg-slate-50 hover:scale-110 active:scale-90"
             aria-label="الشريحة التالية"
           >
             ▶
           </button>
-          <p className={`flex-1 truncate text-center text-5xl font-extrabold text-white transition ${isSpeaking ? 'animate-pulse' : ''}`}>
-            {index}/{total} - {nameAr || name}
-          </p>
+          <div className="flex-1 min-w-0">
+            <p className={`truncate text-center text-4xl font-black text-slate-900 transition-all duration-300 sm:text-5xl md:text-6xl ${isSpeaking ? 'text-indigo-600 scale-105' : ''}`}>
+              {nameAr || name}
+            </p>
+            <p className="mt-1 text-center text-sm font-bold text-slate-400">
+               {index} من {total}
+            </p>
+          </div>
           <button
             type="button"
             onClick={onNext}
-            className="min-h-11 min-w-11 rounded-full border border-white/20 bg-white/10 px-3 text-lg font-bold text-white transition hover:bg-white/20"
+            className="flex h-14 w-14 items-center justify-center rounded-2xl border border-slate-300/50 bg-white text-2xl font-bold text-slate-700 shadow-soft transition-all hover:bg-slate-50 hover:scale-110 active:scale-90"
             aria-label="الشريحة السابقة"
           >
             ◀
@@ -111,22 +115,23 @@ function ImageSlider({
         </div>
       </div>
 
-      <div className="no-scrollbar flex snap-x snap-mandatory gap-3 overflow-x-auto rounded-2xl border border-white/10 bg-white/[0.06] p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+      <div className="no-scrollbar flex snap-x snap-mandatory gap-5 overflow-x-auto rounded-[24px] border border-slate-300/50 bg-slate-200/40 p-5 shadow-inner">
         {items.map((item, idx) => (
           <button
             key={item.id}
             type="button"
             onClick={() => onSelectIndex(idx)}
-            className={`group relative aspect-[4/3] w-32 shrink-0 snap-start overflow-hidden rounded-2xl border-2 transition duration-300 sm:w-36 ${
+            className={`group relative aspect-[4/3] w-36 shrink-0 snap-start overflow-hidden rounded-2xl border-4 transition-all duration-300 sm:w-44 ${
               idx === currentIndex
-                ? 'scale-[1.04] border-emerald-300 shadow-[0_0_0_3px_rgba(52,211,153,0.25),0_10px_24px_rgba(16,185,129,0.25)]'
-                : 'border-white/15 opacity-90 hover:scale-[1.03] hover:border-white/45 hover:opacity-100'
+                ? 'scale-105 border-indigo-500 shadow-medium rotate-1'
+                : 'border-white/50 opacity-70 hover:opacity-100 hover:scale-102 hover:border-white shadow-soft'
             }`}
             aria-label={`اختيار ${item.nameAr || item.name}`}
           >
-            <SafeImage src={item.image} alt={item.name} className="h-full w-full object-cover object-center transition duration-300 group-hover:brightness-110" />
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent px-1.5 pb-1 pt-3">
-              <p className="truncate text-center text-[9px] font-bold text-white">{item.nameAr || item.name}</p>
+            <SafeImage src={item.image} alt={item.name} className="h-full w-full object-cover object-center transition-all duration-500 group-hover:scale-110 group-hover:brightness-105" />
+            <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors" />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent px-3 pb-2 pt-6">
+              <p className="truncate text-center text-[11px] font-black text-white">{item.nameAr || item.name}</p>
             </div>
           </button>
         ))}

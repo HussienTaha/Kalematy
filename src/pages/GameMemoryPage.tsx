@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Card from '../components/ui/Card'
 import PageHeader from '../components/ui/PageHeader'
 import SafeImage from '../components/ui/SafeImage'
+import Button from '../components/ui/Button'
 import { useCategorySlider } from '../context/CategorySliderContext'
 import { categories } from '../data/categories'
 
@@ -59,6 +60,10 @@ function GameMemoryPage() {
   const [matchedPairIds, setMatchedPairIds] = useState<string[]>([])
   const [moves, setMoves] = useState(0)
   const [busy, setBusy] = useState(false)
+
+  const MAX_MOVES = 24
+  const isWin = cards.length > 0 && matchedPairIds.length > 0 && matchedPairIds.length * 2 === cards.length
+  const isGameOver = moves >= MAX_MOVES && !isWin
 
   useEffect(() => {
     const synth = window.speechSynthesis
@@ -140,7 +145,7 @@ function GameMemoryPage() {
   const isFlipped = (card: MemoryCard) => flippedIds.includes(card.id) || isMatched(card)
 
   const onFlip = (card: MemoryCard) => {
-    if (busy) return
+    if (busy || isGameOver || isWin) return
     if (isMatched(card)) return
     if (flippedIds.includes(card.id)) return
     if (flippedIds.length >= 2) return
@@ -173,14 +178,12 @@ function GameMemoryPage() {
     return () => window.clearTimeout(timeout)
   }, [cards, flippedIds])
 
-  const finished = cards.length > 0 && matchedPairIds.length > 0 && matchedPairIds.length * 2 === cards.length
-
   if (pool.length < 3) {
     return (
-      <section className="min-h-screen bg-gradient-to-b from-sky-100 to-indigo-100 px-4 py-10 sm:py-12 dark:from-slate-950 dark:to-slate-900">
+      <section className="min-h-screen bg-gradient-to-b from-sky-50 to-indigo-50 px-4 py-10 sm:py-12  ">
         <div className="mx-auto max-w-4xl">
           <PageHeader title="لعبة" subtitle="لا توجد كلمات عربية كافية لبدء اللعبة." />
-          <Card className="text-slate-700 dark:text-slate-200">
+          <Card className="text-slate-700 ">
             أضف المزيد من الكلمات العربية في بيانات الفئات ثم جرّب مرة أخرى.
           </Card>
         </div>
@@ -189,12 +192,12 @@ function GameMemoryPage() {
   }
 
   return (
-    <section className="min-h-screen bg-gradient-to-b from-sky-100 to-indigo-100 px-4 py-10 sm:py-12 dark:from-slate-950 dark:to-slate-900">
+    <section className="min-h-screen bg-gradient-to-b from-sky-50 to-indigo-50 px-4 py-10 sm:py-12  ">
       <div className="mx-auto max-w-5xl">
         <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
           <Link
             to="/"
-            className="rounded-full bg-white/80 px-4 py-2 text-sm font-bold text-slate-800 shadow-sm transition hover:bg-white dark:bg-slate-900/80 dark:text-slate-100"
+            className="rounded-full bg-white/80 px-4 py-2 text-sm font-bold text-slate-800 shadow-sm transition hover:bg-white  "
           >
             العودة
           </Link>
@@ -210,7 +213,7 @@ function GameMemoryPage() {
             <button
               type="button"
               onClick={setup}
-              className="rounded-full bg-white px-4 py-2 text-sm font-bold text-slate-800 shadow-sm transition hover:bg-slate-50 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700"
+              className="rounded-full bg-white px-4 py-2 text-sm font-bold text-slate-800 shadow-sm transition hover:bg-slate-50   "
               aria-label="إعادة ترتيب البطاقات"
             >
               إعادة
@@ -218,62 +221,83 @@ function GameMemoryPage() {
           </div>
         </div>
 
-        <PageHeader title="لعبة الذاكرة" subtitle="اقلب بطاقتين وحاول مطابقة الكلمة مع الصورة." />
+        <PageHeader title="لعبة الذاكرة" subtitle={(isWin || isGameOver) ? "انتهت اللعبة! 🎉" : "اقلب بطاقتين وحاول مطابقة الكلمة مع الصورة."} />
 
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-[1fr,360px]">
           <Card className="p-5 sm:p-6">
-            <div className="grid grid-cols-3 gap-3 sm:grid-cols-4">
-              {cards.map((card) => {
-                const flipped = isFlipped(card)
-                const matched = isMatched(card)
+            {(isWin || isGameOver) ? (
+              <div className="text-center py-8">
+                <div className="text-6xl mb-4">{isWin ? "🎉👏🔥" : "⌛💔"}</div>
+                <h3 className="text-3xl font-black text-slate-900 mb-2">
+                  {isWin ? "عمل رائع!" : "انتهت المحاولات"}
+                </h3>
+                <p className="text-xl text-slate-600 mb-6">
+                  {isWin 
+                    ? `لقد وجدت جميع المطابقات في ${moves} حركة.` 
+                    : `لقد نفدت الحركات! وجدت ${matchedPairIds.length} من أصل ${cards.length / 2} مطابقة.`}
+                </p>
+                <Button onClick={setup} className="rounded-full px-8 py-4 text-lg">
+                  العب مرة أخرى 🔄
+                </Button>
+              </div>
+            ) : (
+              <div className="grid grid-cols-3 gap-3 sm:grid-cols-4">
+                {cards.map((card) => {
+                  const flipped = isFlipped(card)
+                  const matched = isMatched(card)
 
-                return (
-                  <button
-                    key={card.id}
-                    type="button"
-                    onClick={() => onFlip(card)}
-                    className={`relative aspect-square w-full overflow-hidden rounded-3xl border shadow-sm transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-indigo-300 ${
-                      matched
-                        ? 'border-emerald-300 bg-emerald-50 dark:bg-emerald-500/10'
-                        : 'border-white/30 bg-white/60 hover:bg-white dark:border-white/10 dark:bg-slate-900/50 dark:hover:bg-slate-900/70'
-                    }`}
-                    aria-label={card.label}
-                    disabled={busy}
-                  >
-                    {!flipped ? (
-                      <div className="grid h-full w-full place-items-center">
-                        <span className="text-3xl" aria-hidden="true">
-                          ❓
-                        </span>
-                      </div>
-                    ) : card.kind === 'image' ? (
-                      <SafeImage src={card.image} alt={card.label} className="h-full w-full object-cover object-center" />
-                    ) : (
-                      <div className="grid h-full w-full place-items-center px-2">
-                        <span className="text-center text-lg font-black text-slate-900 dark:text-slate-100">
-                          {card.word}
-                        </span>
-                      </div>
-                    )}
-                  </button>
-                )
-              })}
-            </div>
+                  return (
+                    <button
+                      key={card.id}
+                      type="button"
+                      onClick={() => onFlip(card)}
+                      className={`relative aspect-square w-full overflow-hidden rounded-3xl border shadow-sm transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-indigo-300 ${
+                        matched
+                          ? 'border-emerald-300 bg-emerald-50 '
+                          : 'border-white/30 bg-white/60 hover:bg-white   '
+                      }`}
+                      aria-label={card.label}
+                      disabled={busy}
+                    >
+                      {!flipped ? (
+                        <div className="grid h-full w-full place-items-center">
+                          <span className="text-3xl" aria-hidden="true">
+                            ❓
+                          </span>
+                        </div>
+                      ) : card.kind === 'image' ? (
+                        <SafeImage src={card.image} alt={card.label} className="h-full w-full object-cover object-center" />
+                      ) : (
+                        <div className="grid h-full w-full place-items-center px-2">
+                          <span className="text-center text-lg font-black text-slate-900 ">
+                            {card.word}
+                          </span>
+                        </div>
+                      )}
+                    </button>
+                  )
+                })}
+              </div>
+            )}
           </Card>
 
           <Card className="p-5 sm:p-6">
-            <h3 className="text-lg font-extrabold text-slate-900 dark:text-slate-100">الإحصائيات</h3>
-            <p className="mt-2 text-sm font-semibold text-slate-700 dark:text-slate-200">الحركات: {moves}</p>
-            <p className="mt-1 text-sm font-semibold text-slate-700 dark:text-slate-200">
+            <h3 className="text-lg font-extrabold text-slate-900 ">الإحصائيات</h3>
+            <p className="mt-2 text-sm font-semibold text-slate-700 ">الحركات: {moves} / {MAX_MOVES}</p>
+            <p className="mt-1 text-sm font-semibold text-slate-700 ">
               المطابقات: {matchedPairIds.length} / {Math.floor(cards.length / 2)}
             </p>
 
-            {finished ? (
-              <div className="mt-4 rounded-2xl bg-emerald-500/15 px-4 py-3 text-sm font-bold text-emerald-800 dark:text-emerald-200">
-                ممتاز! لقد أنهيت اللعبة.
+            {isWin ? (
+              <div className="mt-4 rounded-2xl bg-emerald-500/15 px-4 py-3 text-sm font-bold text-emerald-800 ">
+                ممتاز! لقد وجدت كل الصور. ✅
+              </div>
+            ) : isGameOver ? (
+              <div className="mt-4 rounded-2xl bg-red-500/15 px-4 py-3 text-sm font-bold text-red-800 ">
+                حظاً أوفر في المرة القادمة.
               </div>
             ) : (
-              <div className="mt-4 rounded-2xl bg-indigo-500/10 px-4 py-3 text-sm font-semibold text-slate-800 dark:text-slate-100">
+              <div className="mt-4 rounded-2xl bg-indigo-500/10 px-4 py-3 text-sm font-semibold text-slate-800 ">
                 تلميح: اقلب كلمة ثم ابحث عن صورتها.
               </div>
             )}

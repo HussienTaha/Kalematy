@@ -53,7 +53,7 @@ function ReviewPage() {
       <PageHeader title="المراجعة" subtitle="راجع الكلمات كبطاقات تعليمية وتابع تقدمك." />
 
       {!isHydrated ? (
-        <Card className="p-8 text-slate-500 dark:text-slate-400">
+        <Card className="p-8 text-slate-500 ">
           <LoadingSpinner label="جارٍ تجهيز بطاقات المراجعة..." />
         </Card>
       ) : !hasWords ? (
@@ -64,7 +64,7 @@ function ReviewPage() {
       ) : (
         <div className="mx-auto w-full max-w-3xl space-y-4">
           <Card className="p-4 sm:p-5">
-            <div className="mb-2 flex items-center justify-between text-sm text-slate-600 dark:text-slate-400">
+            <div className="mb-2 flex items-center justify-between text-sm text-slate-600 ">
               <span>
                 التقدم: {reviewedCount}/{words.length}
               </span>
@@ -72,7 +72,7 @@ function ReviewPage() {
                 البطاقة {currentIndex + 1}/{words.length}
               </span>
             </div>
-            <div className="h-2 w-full overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700">
+            <div className="h-2 w-full overflow-hidden rounded-full bg-slate-200 ">
               <div
                 className="h-full rounded-full bg-indigo-600 transition-all duration-500"
                 style={{ width: `${Math.min(progressPercent, 100)}%` }}
@@ -92,21 +92,21 @@ function ReviewPage() {
                   isFlipped ? '[transform:rotateY(180deg)]' : ''
                 }`}
               >
-                <Card className="absolute inset-0 flex h-full w-full items-center justify-center rounded-2xl border-indigo-100 bg-gradient-to-br from-indigo-50 to-white p-8 [backface-visibility:hidden] dark:border-indigo-500/20 dark:from-indigo-950/40 dark:to-slate-900">
+                <Card className="absolute inset-0 flex h-full w-full items-center justify-center rounded-2xl border-indigo-100 bg-gradient-to-br from-indigo-50 to-white p-8 [backface-visibility:hidden]   ">
                   <div className="text-center">
                     <p className="mb-2 text-sm font-medium uppercase tracking-wide text-indigo-600">
                       الأمام
                     </p>
-                    <h3 className="text-3xl font-bold text-slate-900 sm:text-4xl dark:text-slate-100">{currentWord.word}</h3>
-                    <p className="mt-4 text-sm text-slate-500 dark:text-slate-400">اضغط على البطاقة لقلبها</p>
+                    <h3 className="text-3xl font-bold text-slate-900 sm:text-4xl ">{currentWord.word}</h3>
+                    <p className="mt-4 text-sm text-slate-500 ">اضغط على البطاقة لقلبها</p>
                   </div>
                 </Card>
 
                 <Card className="absolute inset-0 flex h-full w-full rounded-2xl border-slate-200 bg-white p-8 [backface-visibility:hidden] [transform:rotateY(180deg)]">
                   <div className="my-auto w-full text-center">
-                    <p className="mb-2 text-sm font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">الخلف</p>
-                    <p className="text-xl font-semibold text-slate-900 sm:text-2xl dark:text-slate-100">{currentWord.meaning}</p>
-                    <p className="mt-4 text-sm text-slate-600 sm:text-base dark:text-slate-300">{currentWord.example}</p>
+                    <p className="mb-2 text-sm font-medium uppercase tracking-wide text-slate-500 ">الخلف</p>
+                    <p className="text-xl font-semibold text-slate-900 sm:text-2xl ">{currentWord.meaning}</p>
+                    <p className="mt-4 text-sm text-slate-600 sm:text-base ">{currentWord.example}</p>
                   </div>
                 </Card>
               </div>
@@ -115,7 +115,7 @@ function ReviewPage() {
 
           <Card className="p-4 sm:p-5">
             <div className="mb-3 flex items-center justify-between">
-              <span className="text-sm text-slate-500 dark:text-slate-400">الحالة الحالية: {currentWord.status}</span>
+              <span className="text-sm text-slate-500 ">الحالة الحالية: {currentWord.status}</span>
               <Button type="button" variant="secondary" onClick={goToNext}>
                 تخطي
               </Button>

@@ -9,7 +9,7 @@ const navItems = [
 
 function Sidebar() {
   return (
-    <aside className="w-full border-b border-slate-200 bg-white p-4 md:w-64 md:border-b-0 md:border-r dark:border-slate-700 dark:bg-slate-900">
+    <aside className="w-full border-b border-slate-200 bg-white p-4 md:w-64 md:border-b-0 md:border-r  ">
       <nav className="flex flex-row gap-3 overflow-x-auto md:flex-col">
         {navItems.map((item) => (
           <NavLink
@@ -17,9 +17,7 @@ function Sidebar() {
             to={item.to}
             className={({ isActive }) =>
               `rounded-md px-3 py-2 text-sm font-medium transition duration-200 ${
-                isActive
-                  ? 'bg-indigo-50 text-indigo-700 dark:bg-indigo-500/20 dark:text-indigo-300'
-                  : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-slate-100'
+                isActive ? 'bg-indigo-50 text-indigo-700' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
               }`
             }
           >

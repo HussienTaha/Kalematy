@@ -64,13 +64,13 @@ function DashboardPage() {
       <PageHeader title="لوحة التحكم" subtitle="إدارة قائمة المفردات الخاصة بك." />
 
       <div className="mb-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
-        <Card className="text-slate-700 dark:text-slate-200">سهل: {counts.easy}</Card>
-        <Card className="text-slate-700 dark:text-slate-200">متوسط: {counts.medium}</Card>
-        <Card className="text-slate-700 dark:text-slate-200">صعب: {counts.hard}</Card>
+        <Card className="text-slate-700 ">سهل: {counts.easy}</Card>
+        <Card className="text-slate-700 ">متوسط: {counts.medium}</Card>
+        <Card className="text-slate-700 ">صعب: {counts.hard}</Card>
       </div>
 
       {!isHydrated ? (
-        <Card className="p-8 text-slate-500 dark:text-slate-400">
+        <Card className="p-8 text-slate-500 ">
           <LoadingSpinner label="جارٍ تحميل الكلمات..." />
         </Card>
       ) : words.length === 0 ? (
@@ -97,13 +97,13 @@ function DashboardPage() {
                     }
                   />
                   <label className="block">
-                    <span className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">مثال</span>
+                    <span className="mb-1 block text-sm font-medium text-slate-700 ">مثال</span>
                     <textarea
                       value={draft.example}
                       onChange={(event) =>
                         setDraft((prev) => ({ ...prev, example: event.target.value }))
                       }
-                      className="w-full rounded-md border border-slate-300 px-3 py-2 outline-none transition focus:border-indigo-500 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100"
+                      className="w-full rounded-md border border-slate-300 px-3 py-2 outline-none transition focus:border-indigo-500   "
                     />
                   </label>
                   <select
@@ -111,7 +111,7 @@ function DashboardPage() {
                     onChange={(event) =>
                       setDraft((prev) => ({ ...prev, status: event.target.value as WordItem['status'] }))
                     }
-                    className="w-full rounded-md border border-slate-300 px-3 py-2 outline-none transition focus:border-indigo-500 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100"
+                    className="w-full rounded-md border border-slate-300 px-3 py-2 outline-none transition focus:border-indigo-500   "
                   >
                     <option value="easy">سهل</option>
                     <option value="medium">متوسط</option>
@@ -133,13 +133,13 @@ function DashboardPage() {
               ) : (
                 <>
                   <div className="flex flex-wrap items-center justify-between gap-2">
-                    <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">{item.word}</h3>
-                    <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">
+                    <h3 className="text-lg font-semibold text-slate-900 ">{item.word}</h3>
+                    <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700  ">
                       {item.status}
                     </span>
                   </div>
-                  <p className="mt-2 text-slate-700 dark:text-slate-300">{item.meaning}</p>
-                  <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">{item.example}</p>
+                  <p className="mt-2 text-slate-700 ">{item.meaning}</p>
+                  <p className="mt-2 text-sm text-slate-500 ">{item.example}</p>
                   <div className="mt-3 flex flex-wrap gap-2">
                     <Button type="button" onClick={() => startEdit(item)} variant="secondary">
                       تعديل

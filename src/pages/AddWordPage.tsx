@@ -58,21 +58,21 @@ function AddWordPage() {
             placeholder="مثال: قادر على التعافي سريعاً من الصعوبات"
           />
           <label className="block">
-            <span className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">مثال</span>
+            <span className="mb-1 block text-sm font-medium text-slate-700 ">مثال</span>
             <textarea
               value={example}
               onChange={(event) => setExample(event.target.value)}
               rows={3}
-              className="w-full rounded-md border border-slate-300 px-3 py-2 outline-none transition focus:border-indigo-500 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:placeholder:text-slate-500"
+              className="w-full rounded-md border border-slate-300 px-3 py-2 outline-none transition focus:border-indigo-500    "
               placeholder="مثال: ظل مرناً بعد الانتكاسة."
             />
           </label>
           <label className="block">
-            <span className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">الحالة</span>
+            <span className="mb-1 block text-sm font-medium text-slate-700 ">الحالة</span>
             <select
               value={status}
               onChange={(event) => setStatus(event.target.value as WordStatus)}
-              className="w-full rounded-md border border-slate-300 px-3 py-2 outline-none transition focus:border-indigo-500 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100"
+              className="w-full rounded-md border border-slate-300 px-3 py-2 outline-none transition focus:border-indigo-500   "
             >
               <option value="easy">سهل</option>
               <option value="medium">متوسط</option>
@@ -87,7 +87,7 @@ function AddWordPage() {
       </Card>
       <div className="mt-6 max-w-2xl">
         {!isHydrated ? (
-          <Card className="p-6 text-slate-500 dark:text-slate-400">
+          <Card className="p-6 text-slate-500 ">
             <LoadingSpinner label="جارٍ تحميل إحصائيات الكلمات..." />
           </Card>
         ) : words.length === 0 ? (
@@ -96,7 +96,7 @@ function AddWordPage() {
             description="هذا وقت مناسب لإضافة أول كلمة وبدء رحلة المراجعة."
           />
         ) : (
-          <Card className="p-5 text-sm text-slate-600 dark:text-slate-300">
+          <Card className="p-5 text-sm text-slate-600 ">
             لديك حالياً <span className="font-semibold">{words.length}</span> كلمة محفوظة.
           </Card>
         )}

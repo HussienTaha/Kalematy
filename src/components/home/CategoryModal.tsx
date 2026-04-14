@@ -110,17 +110,17 @@ function CategoryModal() {
 
   return (
     <ModalShell title={`عارض ${selectedCategory.name}`}>
-      <div className="mb-3 flex items-center justify-between gap-3 rounded-2xl bg-white/5 px-3 py-2 sm:mb-4 sm:px-4">
-        <div className="min-w-0 flex-1">
-          <h3 className="truncate text-xl font-extrabold text-white sm:text-3xl">{selectedCategory.name}</h3>
-          <p className="mt-1 text-sm text-slate-300">
+      <div className="mb-4 flex items-center justify-between gap-4 rounded-2xl bg-slate-50 border border-slate-100 px-4 py-3 sm:mb-6 sm:px-6 shadow-soft">
+        <div className="min-w-0 flex-1 text-right">
+          <h3 className="truncate text-2xl font-black text-slate-900 sm:text-4xl">{selectedCategory.name}</h3>
+          <p className="mt-1 text-sm font-bold text-indigo-600">
             الإكمال: {progressByCategory[selectedCategory.id]?.viewedItemIds?.length ?? 0}/{selectedCategory.items.length}
           </p>
         </div>
         <button
           type="button"
           onClick={handleClose}
-          className="grid min-h-12 min-w-12 place-items-center rounded-full bg-white/10 px-3 py-2 text-base font-bold text-white transition hover:scale-105 hover:bg-white/20"
+          className="flex h-12 w-12 items-center justify-center rounded-full bg-white border border-slate-200 text-xl font-bold text-slate-600 transition hover:scale-110 hover:bg-red-50 hover:text-red-500 hover:border-red-200 shadow-soft"
           aria-label="إغلاق"
         >
           ✕

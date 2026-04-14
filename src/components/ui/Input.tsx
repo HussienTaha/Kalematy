@@ -9,10 +9,10 @@ function Input({ label, className = '', id, ...props }: InputProps) {
 
   return (
     <label className="block">
-      <span className="mb-1 block text-sm font-medium text-slate-700">{label}</span>
+      <span className="mb-1.5 block text-sm font-semibold text-slate-700 ">{label}</span>
       <input
         id={inputId}
-        className={`w-full rounded-md border border-slate-300 px-3 py-2 outline-none transition focus:border-indigo-500 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:placeholder:text-slate-500 ${className}`}
+        className={`w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 outline-none transition-all focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10     ${className}`}
         {...props}
       />
     </label>
