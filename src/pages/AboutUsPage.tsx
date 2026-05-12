@@ -132,7 +132,7 @@ function AboutUsPage() {
             <div className="">
               {" "}
               <h2 className="mb-4 text-2xl font-bold text-slate-800">
-                صور المشروع
+    صور  الجامعه
               </h2>
             </div>
             <div className="">
