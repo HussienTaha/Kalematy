@@ -11,11 +11,13 @@ import LoginPage from './pages/LoginPage'
 import ProfilePage from './pages/ProfilePage'
 import RegisterPage from './pages/RegisterPage'
 import ReviewPage from './pages/ReviewPage'
+import AboutUsPage from './pages/AboutUsPage'
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/about-us" element={<AboutUsPage />} />
       <Route path="/game" element={<GamePage />} />
       <Route path="/game/choose-word" element={<GameChooseWordPage />} />
       <Route path="/game/memory" element={<GameMemoryPage />} />
@@ -32,6 +34,7 @@ function App() {
         <Route path="/add-word" element={<AddWordPage />} />
         <Route path="/review" element={<ReviewPage />} />
         <Route path="/profile" element={<ProfilePage />} />
+      
       </Route>
     </Routes>
   )
